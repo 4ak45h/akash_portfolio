@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Akash Jatikart | Portfolio</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ==== BASE STYLES ==== */
+body {
+font-family: 'Playfair Display', serif;
+color: white;
+scroll-behavior: smooth;
+}
+.hero-bg {
+position: relative;
+/* Using a fixed placeholder URL for guaranteed loading */
+background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.75)), url('5.jpg') center/cover fixed;
+}
+/* You can add more custom styles here if needed */
+.text-accent-blue { color: #2aa4d5e6; }
+.text-accent-pink { color: #F1B77B; }
+.bg-accent-pink-base { background-color: #F1B77B; }
+/* ==== ANIMATIONS ==== */
+@keyframes glow {
+0%, 100% { box-shadow: 0 0 25px rgba(243,169,110,0.6), 0 0 45px rgba(241,183,123,0.4); }
+50% { box-shadow: 0 0 55px rgba(243,169,110,0.9), 0 0 85px rgba(241,183,123,0.6); }
+}
+@keyframes shine {
+0% { transform: translateX(-100%) rotate(45deg); opacity: 0; }
+50% { opacity: 0.6; }
+100% { transform: translateX(100%) rotate(45deg); opacity: 0; }
+}
+@keyframes typing {
+0%, 40% { width: 0; }
+50%, 100% { width: 100%; }
+}
+@keyframes blink {
+50% { border-color: transparent; }
+}
+.animate-glow { animation: glow 3s ease-in-out infinite alternate; }
+.animate-shine { animation: shine 4s linear infinite; pointer-events: none; }
+.typing {
+display: inline-block;
+border-right: 3px solid rgba(243,169,110,0.9);
+white-space: nowrap;
+overflow: hidden;
+animation: typing 2.5s steps(20) infinite alternate, blink 0.7s step-end infinite;
+}
+/* ==== SKILL CARDS (FIXED SIZING) ==== */
+.skill-card {
+position: relative;
+overflow: hidden;
+border-radius: 0.75rem;
+/* Added white border for visible separation */
+border: 2px solid rgba(255,255,255,0.1);
+box-shadow: 0 0 15px rgba(0,0,0,0.5);
+transition: all 0.4s ease;
+background-size: cover;
+background-position: center;
+/* Aspect ratio for responsive sizing in grid */
+aspect-ratio: 4 / 3;
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+cursor: pointer; /* Indicate clickability */
+}
+.skill-card:hover {
+transform: scale(1.02);
+border-color: #F1B77B;
+box-shadow: 0 0 40px rgba(243,169,110,0.5);
+}
+.skill-overlay {
+/* Dark gradient overlay for text visibility */
+background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.2) 50%);
+padding: 1.5rem;
+width: 100%;
+transition: background 0.4s ease;
+}
+.skill-card:hover .skill-overlay {
+background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.3) 50%);
+}
+/* ==== MODAL STYLES ==== */
+.modal-overlay {
+visibility: hidden;
+opacity: 0;
+transition: opacity 0.3s, visibility 0.3s;
+}
+.modal-overlay.open {
+visibility: visible;
+opacity: 1;
+}
+/* ==== RESPONSIVE ==== */
+@media (max-width: 1024px) {
+.hero-section { grid-template-columns: 1fr; text-align: center; }
+}
+
+@keyframes modalPop {
+  0% { opacity: 0; transform: scale(0.9) translateY(20px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.animate-modalPop {
+  animation: modalPop 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+  @keyframes pulseGlow {
+    0%, 100% { text-shadow: 0 0 8px #F1B77B; }
+    50% { text-shadow: 0 0 20px #ffd9a0; }
+  }
+
+  #contact .fa-github,
+  #contact .fa-linkedin,
+  #contact .fa-envelope {
+    animation: pulseGlow 2s infinite ease-in-out;
+  }
+</style>
+</head>
+<body class="min-h-screen flex flex-col bg-black">
+<!-- ===== NAVBAR ===== -->
+<header class="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-6 text-white z-20 backdrop-blur-sm bg-black/50" style="color: rgba(243,169,110,0.9);">
+<h2 class="font-semibold text-lg tracking-wider">Portfolio</h2>
+<nav class="hidden md:flex space-x-8 text-sm uppercase tracking-widest">
+<a href="#about" class="hover:text-white transition">About</a>
+<a href="#skills" class="hover:text-white transition">Skills</a>
+<a href="#education" class="hover:text-white transition">Education</a>
+<a href="#projects" class="hover:text-white transition">Projects</a>
+<a href="#contact" class="hover:text-white transition">Contact</a>
+</nav>
+</header>
+<!-- Spacer -->
+<div class="h-20"></div>
+<!-- ===== HERO / ABOUT SECTION ===== -->
+<section id="about" class="hero-bg hero-section grid grid-cols-1 lg:grid-cols-3 gap-14 px-8 md:px-16 lg:px-24 py-32 items-center min-h-[90vh]">
+<!-- LEFT -->
+<div class="text-left lg:text-left">
+<h1 class="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight mb-8">
+Akash<br>Prakash<br>Jatikart
+</h1>
+<p id="role" class="text-2xl md:text-3xl font-semibold uppercase tracking-wide text-accent-blue typing"></p>
+
+<div class="relative flex justify- mt-16">
+  <!-- subtle background strip -->
+  <div class="absolute inset-x-0 h-10 bg-black/50 blur-lg rounded-2xl"></div>
+
+  <!-- icon row -->
+  <div class="relative flex space-x-14 text-4xl">
+    <a href="https://github.com/4ak45h" target="_blank"
+       class="text-[#FFDCA8] hover:text-[#fff3d6] drop-shadow-[0_0_12px_#F1B77B] transition-transform transform hover:scale-125">
+       <i class="fab fa-github"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/akashjatikart" target="_blank"
+       class="text-[#FFDCA8] hover:text-[#fff3d6] drop-shadow-[0_0_12px_#F1B77B] transition-transform transform hover:scale-125">
+       <i class="fab fa-linkedin"></i>
+    </a>
+    <a href="mailto:akashjatikart@gmail.com"
+       class="text-[#FFDCA8] hover:text-[#fff3d6] drop-shadow-[0_0_12px_#F1B77B] transition-transform transform hover:scale-125">
+       <i class="fas fa-envelope"></i>
+    </a>
+  </div>
+</div>
+<br/>
+<!-- RESUME BUTTON (NEW) - ADDED DOWNLOAD ATTRIBUTE -->
+    <div class="mb-12">
+        <a href="Resume.pdf" target="_blank" download="akash_jatikart_resume.pdf"
+            class="inline-flex items-center space-x-3 px-10 py-4 bg-accent-pink-base text-black font-bold uppercase rounded-full tracking-wider transition hover:scale-105 hover:shadow-xl hover:bg-white text-lg">
+            <i class="fas fa-download"></i>
+            <span>My Resume</span>
+        </a>
+    </div>
+</div>
+<!-- CENTER IMAGE -->
+<div class="flex justify-center relative">
+<div class="relative w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden p-[4px] bg-gradient-to-tr from-[#F3A96E] via-[#F1B77B] to-[#FF8C00] animate-glow">
+<img src="MY.jpg" onerror="this.src='https://placehold.co/600x600/000000/FFFFFF?text=Akash';" alt="Akash Jatikart" class="w-full h-full rounded-full object-cover" />
+<div class="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/25 to-transparent animate-shine"></div>
+</div>
+</div>
+<!-- RIGHT -->
+<div class="text-left lg:text-right space-y-6 max-w-lg mx-auto lg:mx-0">
+<p class="text-2xl md:text-3xl leading-snug">“Calm mind can <span class="text-accent-pink italic">solve any problem</span>.”</p>
+<p class="text-2xl md:text-3xl text-accent-blue font-semibold italic">ABOUT ME</p>
+<div class="flex flex-wrap gap-6 justify-center lg:justify-end pb-4 border-b border-white/20">
+<div class="text-center">
+<span class="text-4xl font-bold text-accent-pink">1+</span>
+<p class="text-sm uppercase tracking-wider text-white/70">Years Experience</p>
+</div>
+<div class="text-center">
+<span class="text-4xl font-bold text-accent-pink">6+</span>
+<p class="text-sm uppercase tracking-wider text-white/70">Projects</p>
+</div>
+<div class="text-center">
+<span class="text-4xl font-bold text-accent-pink">AI/ML</span>
+<p class="text-sm uppercase tracking-wider text-white/70">Specialization</p>
+</div>
+</div>
+<p class="text-lg md:text-xl text-white/90 leading-relaxed">
+I'm Akash, a data science enthusiast passionate about Python, AI, and intelligent systems that merge logic and creativity.<br/> I aim to craft clean, data-driven, and visually expressive solutions.
+</p>
+<p class="text-lg md:text-xl text-white/90 leading-relaxed">
+<b>My philosophy:</b> good design isn't just beauty <br/>it's clarity and purpose.
+</p>
+<div class="pt-6 flex justify-center lg:justify-end">
+<a href="#projects" class="px-8 py-3 bg-accent-pink-base text-black font-bold uppercase rounded-full tracking-widest transition hover:scale-105 hover:shadow-xl hover:bg-white">
+View Projects
+</a>
+</div>
+</div>
+</section>
+<!-- ===== SKILLS SECTION ===== -->
+<section id="skills" class="bg-black py-24 px-8 md:px-16 lg:px-24 min-h-screen flex items-center">
+<div class="max-w-7xl mx-auto w-full text-center">
+<h2 class="text-5xl font-bold mb-10 text-accent-pink uppercase tracking-widest">Skills ~ Expertise</h2>
+<p class="text-xl text-white/70 max-w-3xl mx-auto mb-16">
+A concise overview of my technical stack and tools in development and data science.
+</p>
+<!-- Grid is 3 columns on large screens -->
+<div id="skill-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-8">
+<!-- Skill Cards rendered here by JS -->
+</div>
+</div>
+</section>
+
+
+
+<!-- ===== EDUCATION SECTION: THE HERO'S QUEST ===== -->
+<section id="education" class="relative bg-black min-h-screen py-24 px-8 md:px-16 lg:px-24 overflow-hidden">
+  <!-- Background + Gradient Transition -->
+  <div class="absolute inset-0 z-0">
+    <img src="5.jpg"
+         class="w-full h-full object-cover opacity-65" alt="Fantasy Forest">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+  </div>
+
+  <!-- Section Heading -->
+  <div class="relative z-10 max-w-7xl mx-auto text-center">
+    <h2 class="text-5xl font-bold mb-10 text-accent-pink uppercase tracking-widest">Education</h2>
+    <p class="text-white/70 mb-16 text-lg max-w-2xl mx-auto">
+      Everyone begins their journey somewhere — through trials of learning, challenges of creation, and quests for mastery.
+    </p>
+
+    <!-- Education Journey Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      
+      <!-- === CARD 1: BCA === -->
+      <div onclick="openEduModal('BCA: The Beginning of Wisdom', '2021–2024', 
+      'The journey began in the Kingdom of Code — BCA forged the foundation of logic, algorithms, and creativity. From Python scrolls to database spells, every semester shaped a new skill.', 
+      'skill/api.jpg')" 
+        class="relative group cursor-pointer rounded-xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-105 border border-[#F1B77B]/50">
+        <img src="skill/bca.jpg" 
+             class="w-full h-80 object-cover" alt="BCA">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent group-hover:opacity-90 transition-all duration-300 flex flex-col justify-end p-6">
+          <h3 class="text-3xl font-bold text-accent-pink mb-2">BCA</h3>
+          <p class="text-white/80 text-lg">2021 – 2024</p>
+        </div>
+      </div>
+
+      <!-- === CARD 2: Internship === -->
+      <div onclick="openEduModal('Internship: The Forge of Experience', '2023', 
+      'In the city of Haegl, the apprentice joined the guild of developers — crafting the Fashion Fusion platform. Through trial, debugging, and teamwork, skills were tempered in real-world flame.', 
+      'skill/web.jpg')" 
+        class="relative group cursor-pointer rounded-xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-105 border border-[#F1B77B]/50">
+        <img src="skill/int.jpg" 
+             class="w-full h-80 object-cover" alt="Internship">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent group-hover:opacity-90 transition-all duration-300 flex flex-col justify-end p-6">
+          <h3 class="text-3xl font-bold text-accent-pink mb-2">Internship</h3>
+          <p class="text-white/80 text-lg">2023</p>
+        </div>
+      </div>
+
+      <!-- === CARD 3: MCA === -->
+      <div onclick="openEduModal('MCA: The Master’s Path', '2024–2026', 
+      'Now the hero ascends into the higher realms of computation — exploring the magic of AI, data science, and innovation. The quest continues toward mastering technology and wisdom.', 
+      'skill/data.jpg')" 
+        class="relative group cursor-pointer rounded-xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-105 border border-[#F1B77B]/50">
+        <img src="skill/mca.jpg" 
+             class="w-full h-80 object-cover" alt="MCA">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent group-hover:opacity-90 transition-all duration-300 flex flex-col justify-end p-6">
+          <h3 class="text-3xl font-bold text-accent-pink mb-2">MCA</h3>
+          <p class="text-white/80 text-lg">2024 – 2026</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- === Education Modal === -->
+  <div id="edu-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-500">
+    <div id="edu-modal-box" class="relative w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-[#1f1f2e] to-[#2b2b3d] transform scale-95 transition-all duration-500">
+      <div class="relative p-8 text-white">
+        <button class="absolute top-4 right-4 text-3xl text-white/80 hover:text-white transition" onclick="closeEduModal()">&times;</button>
+        <h3 id="edu-modal-title" class="text-3xl font-bold mb-2 text-accent-pink">Title</h3>
+        <p id="edu-modal-date" class="text-lg text-white/70 mb-4">Date</p>
+        <div id="edu-modal-desc" class="text-lg leading-relaxed text-white/90">
+          Description goes here.
+        </div>
+      </div>
+      <div id="edu-modal-bg" class="absolute inset-0 opacity-20 bg-cover bg-center -z-10 transition-all duration-700"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS SECTION ===== -->
+<section id="projects" class="relative bg-black py-24 px-8 md:px-16 lg:px-24 overflow-hidden min-h-screen">
+  <!-- Background -->
+  <div class="absolute inset-0 z-0">
+    <!-- <img src="5.jpg" alt="Projects Background" class="w-full h-full object-cover opacity-50"> -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent"></div>
+  </div>
+
+  <!-- Section Content -->
+  <div class="relative z-10 max-w-7xl mx-auto text-center">
+    <h2 class="text-5xl font-bold mb-10 text-accent-pink uppercase tracking-widest">Projects</h2>
+    <p class="text-white/70 mb-16 text-lg max-w-3xl mx-auto">
+      Each project is a chapter in my journey — merging design, logic, and innovation into interactive creations.
+    </p>
+
+    <!-- Project Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      
+      <!-- Project Card Template -->
+      <div onclick="openProjectModal(
+          'Smart Asset & Financial Dashboard',
+          'A chess-themed financial tracker built using Flask, Tailwind, and SQLite. Each card represents assets, income, and savings with dynamic logs and animated arena graphs.',
+          'Flask, Tailwind CSS, MySQL',
+          ['project/log.png', 'project/cow.png', 'project/fin.png'],
+          'https://github.com/4ak45h/Chessboard_of_wealth'
+        )" 
+        class="group relative overflow-hidden rounded-2xl border border-[#F1B77B]/50 shadow-xl transform transition-all duration-500 hover:scale-105 cursor-pointer">
+          <img src="project/chess.jpg" alt="Finance Dashboard" class="w-full h-72 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 transition-all duration-300 group-hover:bg-black/70">
+            <h3 class="text-2xl font-bold text-accent-pink mb-2">Smart Finance Dashboard: Chessboard_of_wealth </h3>
+            <p class="text-white/80 text-sm">Flask • Tailwind • MySQL</p>
+          </div>
+        </div>
+
+
+      <div onclick="openProjectModal(
+          'Legacy Planner',
+          'A legacy planner for a portfolio typically refers to a strategic document or set of instructions detailing the desired distribution and management of assets upon the portfolio owners incapacitation or death, ensuring their financial wishes and wealth transfer goals are met.',
+          'Nodejs, MySQL, Javascript, AI/ML',
+          [], 
+          'https://github.com/4ak45h/Legacy_Planner'
+        )" 
+        class="group relative overflow-hidden rounded-2xl border border-[#F1B77B]/50 shadow-xl transform transition-all duration-500 hover:scale-105 cursor-pointer">
+          <img src="project/legacy.jpg" alt="Finance Dashboard" class="w-full h-72 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 transition-all duration-300 group-hover:bg-black/70">
+            <h3 class="text-2xl font-bold text-accent-pink mb-2">Legacy Planner</h3>
+            <p class="text-white/80 text-sm">JavaScript • Nodejs • MySQL • AI/ML</p>
+          </div>
+        </div>
+
+      <div onclick="openProjectModal(
+          'Fashion Fusion',
+          'An AI-powered eCommerce platform that blends style with technology to deliver personalized fashion recommendations and seamless shopping experiences.',
+          'Python, Flask, Web Tools',
+          [],
+          'https://github.com/4ak45h/Fashion-fusion'
+        )" 
+        class="group relative overflow-hidden rounded-2xl border border-[#F1B77B]/50 shadow-xl transform transition-all duration-500 hover:scale-105 cursor-pointer">
+          <img src="project/fashion.jpg" alt="Finance Dashboard" class="w-full h-72 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 transition-all duration-300 group-hover:bg-black/70">
+            <h3 class="text-2xl font-bold text-accent-pink mb-2">Fashion Fusion</h3>
+            <p class="text-white/80 text-sm">Python • Flask • Web Tools</p>
+          </div>
+        </div>
+
+    <!--  <div onclick="openProjectModal(
+          'Smart Asset & Financial Dashboard',
+          'A chess-themed financial tracker built using Flask, Tailwind, and SQLite. Each card represents assets, income, and savings with dynamic logs and animated arena graphs.',
+          'Flask, Tailwind CSS, SQLite',
+          ['project/log.png', 'project/cow.png', 'project/fin.png'],
+          'https://github.com/yourusername/smart-finance-dashboard'
+        )" 
+        class="group relative overflow-hidden rounded-2xl border border-[#F1B77B]/50 shadow-xl transform transition-all duration-500 hover:scale-105 cursor-pointer">
+          <img src="project/cow.png" alt="Finance Dashboard" class="w-full h-72 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 transition-all duration-300 group-hover:bg-black/70">
+            <h3 class="text-2xl font-bold text-accent-pink mb-2">Fashion Fusion</h3>
+            <p class="text-white/80 text-sm">Flask • Tailwind • SQLite</p>
+          </div>
+        </div>
+
+      <div onclick="openProjectModal(
+          'Smart Asset & Financial Dashboard',
+          'A chess-themed financial tracker built using Flask, Tailwind, and SQLite. Each card represents assets, income, and savings with dynamic logs and animated arena graphs.',
+          'Flask, Tailwind CSS, SQLite',
+          ['project/log.png', 'project/cow.png', 'project/fin.png'],
+          'https://github.com/yourusername/smart-finance-dashboard'
+        )" 
+        class="group relative overflow-hidden rounded-2xl border border-[#F1B77B]/50 shadow-xl transform transition-all duration-500 hover:scale-105 cursor-pointer">
+          <img src="project/cow.png" alt="Finance Dashboard" class="w-full h-72 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 transition-all duration-300 group-hover:bg-black/70">
+            <h3 class="text-2xl font-bold text-accent-pink mb-2">Health</h3>
+            <p class="text-white/80 text-sm">Flask • Tailwind • SQLite</p>
+          </div>
+        </div>
+
+      <div onclick="openProjectModal(
+          'Smart Asset & Financial Dashboard',
+          'A chess-themed financial tracker built using Flask, Tailwind, and SQLite. Each card represents assets, income, and savings with dynamic logs and animated arena graphs.',
+          'Flask, Tailwind CSS, SQLite',
+          ['project/log.png', 'project/cow.png', 'project/fin.png'],
+          'https://github.com/yourusername/smart-finance-dashboard'
+        )" 
+        class="group relative overflow-hidden rounded-2xl border border-[#F1B77B]/50 shadow-xl transform transition-all duration-500 hover:scale-105 cursor-pointer">
+          <img src="project/cow.png" alt="Finance Dashboard" class="w-full h-72 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 transition-all duration-300 group-hover:bg-black/70">
+            <h3 class="text-2xl font-bold text-accent-pink mb-2">AI Recipe</h3>
+            <p class="text-white/80 text-sm">Flask • Tailwind • SQLite</p>
+          </div>
+        </div>
+-->
+    </div>
+  </div>
+
+<!-- ===== Project Modal ===== -->
+<div id="project-modal" 
+     class="fixed inset-0 bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none 
+            transition-all duration-300 flex items-center justify-center z-50 animate-modalPop">
+  <div id="project-modal-box" 
+       class="bg-[#111] p-6 rounded-2xl w-[90%] max-w-3xl transform scale-95 transition-all duration-300 relative border border-[#F1B77B]/40 shadow-2xl">
+    
+    <!-- Close Button -->
+    <button onclick="closeProjectModal()" 
+            class="absolute top-3 right-3 text-gray-300 hover:text-white text-3xl font-bold">&times;</button>
+
+    <h2 id="project-modal-title" class="text-2xl font-bold text-[#F1B77B] mb-2"></h2>
+    <p id="project-modal-desc" class="text-gray-300 mb-4"></p>
+    <p id="project-modal-tech" class="text-sm text-gray-400 mb-4"></p>
+    
+    <div id="project-modal-gallery" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4"></div>
+
+    <a id="project-modal-github" href="#" target="_blank"
+       class="inline-block bg-[#F1B77B] text-black font-semibold py-2 px-4 rounded-lg hover:bg-[#f8c785] transition">
+      🔗 View on GitHub
+    </a>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- ===== CONTACT SECTION ===== -->
+<section id="contact" class="relative bg-black py-24 px-8 md:px-16 lg:px-24 overflow-hidden min-h-screen">
+  <!-- Background -->
+  <div class="absolute inset-0 z-0">
+    <img src="5.jpg" alt="Contact Background" class="w-full h-full object-cover opacity-80">
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent"></div>
+  </div>
+
+  <!-- Section Content -->
+  <div class="relative z-10 max-w-5xl mx-auto text-center">
+    <h2 class="text-5xl font-bold mb-10 text-accent-pink uppercase tracking-widest">Contact</h2>
+    <p class="text-white/70 mb-12 text-lg max-w-2xl mx-auto">
+      Let's connect — whether it's for collaboration, a project idea, or a spark of curiosity.  
+      Drop me a message and I'll respond as soon as possible.
+    </p>
+
+    <!-- RESUME BUTTON (NEW) -->
+    <div class="mb-12">
+        <a href="Resume.pdf" target="_blank"
+            class="inline-flex items-center space-x-3 px-10 py-4 bg-accent-pink-base text-black font-bold uppercase rounded-full tracking-wider transition hover:scale-105 hover:shadow-xl hover:bg-white text-lg">
+            <i class="fas fa-download"></i>
+            <span>My Resume</span>
+        </a>
+    </div>
+
+    <!-- Contact Form 
+    <form class="grid grid-cols-1 gap-6 max-w-2xl mx-auto text-left">
+      <div>
+        <label class="block text-white/80 mb-2">Name</label>
+        <input type="text" placeholder="Your name"
+               class="w-full px-4 py-3 rounded-lg bg-black/40 border border-[#F1B77B]/30 text-white focus:outline-none focus:ring-2 focus:ring-[#F1B77B] transition">
+      </div>
+      <div>
+        <label class="block text-white/80 mb-2">Email</label>
+        <input type="email" placeholder="your@email.com"
+               class="w-full px-4 py-3 rounded-lg bg-black/40 border border-[#F1B77B]/30 text-white focus:outline-none focus:ring-2 focus:ring-[#F1B77B] transition">
+      </div>
+      <div>
+        <label class="block text-white/80 mb-2">Message</label>
+        <textarea rows="5" placeholder="Write your message here..."
+                  class="w-full px-4 py-3 rounded-lg bg-black/40 border border-[#F1B77B]/30 text-white focus:outline-none focus:ring-2 focus:ring-[#F1B77B] transition"></textarea>
+      </div>
+      <button type="submit"
+              class="mt-4 bg-[#F1B77B] text-black font-semibold py-3 rounded-lg hover:bg-[#f8c785] transition transform hover:scale-105">
+        ✉ Send Message
+      </button>
+    </form>-->
+
+<!-- Social Links -->
+<div class="relative flex justify-center mt-16">
+  <!-- subtle background strip -->
+  <div class="absolute inset-x-0 h-20 bg-black/50 blur-lg rounded-2xl"></div>
+
+  <!-- icon row -->
+  <div class="relative flex space-x-10 text-4xl">
+    <a href="https://github.com/4ak45h" target="_blank"
+       class="text-[#FFDCA8] hover:text-[#fff3d6] drop-shadow-[0_0_12px_#F1B77B] transition-transform transform hover:scale-125">
+       <i class="fab fa-github"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/akashjatikart" target="_blank"
+       class="text-[#FFDCA8] hover:text-[#fff3d6] drop-shadow-[0_0_12px_#F1B77B] transition-transform transform hover:scale-125">
+       <i class="fab fa-linkedin"></i>
+    </a>
+    <a href="mailto:akashjatikart@gmail.com"
+       class="text-[#FFDCA8] hover:text-[#fff3d6] drop-shadow-[0_0_12px_#F1B77B] transition-transform transform hover:scale-125">
+       <i class="fas fa-envelope"></i>
+    </a>
+  </div>
+</div>
+</div>
+
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="bg-black text-center py-8 text-white/60 text-sm border-t border-white/10">
+  © 2025 Akash Prakash Jatikart — Crafted with curiosity and code.
+</footer>
+
+<!-- ===== MODAL WINDOW (Hidden by default) ===== -->
+<div id="skill-modal" class="modal-overlay fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onclick="closeModal()">
+<div class="w-full max-w-lg rounded-xl overflow-hidden shadow-2xl transition-all duration-300 transform scale-95 modal-content" onclick="event.stopPropagation()">
+<!-- Modal Header with Gradient from clicked card -->
+<div id="modal-header" class="relative p-6 md:p-8 text-white">
+<h3 id="modal-title" class="text-3xl font-bold mb-2">Skill Title</h3>
+<p id="modal-subtitle" class="text-lg text-white/80">Skill Subtitle</p>
+<button class="absolute top-4 right-4 text-white/70 hover:text-white transition-colors text-2xl" onclick="closeModal()">
+&times;
+</button>
+</div>
+<!-- Modal Body -->
+<div class="bg-gray-900 p-6 md:p-8 text-white space-y-4">
+<p id="modal-description" class="text-lg leading-relaxed">
+Detailed description will be injected here. It provides a more in-depth look at this skill category and my specific expertise.
+</p>
+<p class="text-sm text-accent-pink uppercase font-semibold">Key Tools:</p>
+<ul id="modal-tools" class="list-disc list-inside text-white/80 pl-4">
+<!-- Tools injected here -->
+</ul>
+</div>
+</div>
+</div>
+<!-- ===== JS: Typing + Skills Injection ===== -->
+<script>
+// --- TYPING ANIMATION ---
+const roles = ["Web Developer", "Data Analyst", "AI Enthusiast"];
+const roleElement = document.getElementById("role");
+let i = 0;
+function changeRole() {
+roleElement.textContent = roles[i];
+i = (i + 1) % roles.length;
+}
+changeRole();
+setInterval(changeRole, 3000);
+// --- SKILL DATA ---
+const skills = [
+{ title: "Programming Languages", subtitle: "Python, Java, C", img: "p.jpg", description: "My foundational knowledge lies in core programming principles. Python is my primary tool for data science and automation, while C and Java provided crucial insights into low-level systems and object-oriented design.", tools: ["Python (Advanced)", "Java (Intermediate)", "C (Basic/Foundational)"] },
+{ title: "Deep Learning", subtitle: "TensorFlow, Keras, PyTorch Basics", img: "dl.jpg", description: "Experience in building, training, and deploying neural networks for complex tasks like image classification and sequence modeling, primarily using the TensorFlow and Keras ecosystems.", tools: ["TensorFlow/Keras", "PyTorch (Basics)", "CNNs, RNNs"] },
+{ title: "Databases", subtitle: "SQL, MySQL, MongoDB, Firebase", img: "db.jpg", description: "Proficiency in both relational (SQL) and NoSQL databases. I understand data modeling, query optimization, and how to integrate databases efficiently with web and data applications.", tools: ["SQL & Query Optimization", "MySQL"] },// "MongoDB (NoSQL)", "Firebase/Firestore"
+{ title: "Version Control", subtitle: "Git, GitHub, Branching/Merging", img: "git.jpg", description: "Essential for collaboration and project stability. I am comfortable with Git workflows, including branching, merging, and resolving conflicts on platforms like GitHub.", tools: [ "GitHub", "Branching Strategies"] },
+{ title: "Web Frontend", subtitle: "HTML, CSS, JavaScript, Tailwind, React Basics", img: "web.jpg", description: "Ability to create responsive, modern user interfaces. I focus on clean design (Tailwind) and functional interactivity (JavaScript), with a basic understanding of component-based architectures like React.", tools: ["HTML5 / CSS3", "Tailwind CSS", "JavaScript ES6+", "React"] },
+{ title: "Data Analysis", subtitle: "Pandas, Numpy, Matplotlib, Seaborn", img: "data.jpg", description: "Expertise in cleaning, processing, and visualizing large datasets to derive actionable insights. I rely heavily on Python's scientific stack for statistical computing and data transformation.", tools: ["Pandas", "Numpy", "Matplotlib/Seaborn", "Statistical Analysis"] },
+{ title: "Cloud Platforms", subtitle: "AWS, Azure, Docker", img: "cloud.jpg", description: "Familiarity with cloud computing concepts, including hosting, storage, and deployment. I use Docker for containerization to ensure application portability and reliable environments.", tools: ["AWS (S3/EC2 Basics)", "Azure (Basics)", "Docker"] },
+{ title: "Backend & APIs", subtitle: "Flask, Node.js Basics, RESTful Services", img: "api.jpg", description: "Skilled in creating server-side logic and developing robust RESTful APIs to connect the frontend to databases and external services. Flask is my go-to framework for Python backends.", tools: ["Flask Framework", "RESTful API Design", "Node.js (Basics)", "Authentication"] },
+{ title: "Tools & Methodologies", subtitle: "Excel, Agile, VS Code", img: "tools.jpg", description: "Proficient with common developer tools and modern development methodologies like Agile/Scrum. This ensures efficient project management and iteration.", tools: ["Excel", "Visual Studio Code", "Agile/Scrum", "Figma","Blender"] }
+];
+// --- MODAL FUNCTIONS ---
+const modal = document.getElementById('skill-modal');
+const modalHeader = document.getElementById('modal-header');
+function closeModal() { modal.classList.remove('open'); }
+function openModal(skill, backgroundImage) {
+document.getElementById('modal-title').textContent = skill.title;
+document.getElementById('modal-subtitle').textContent = skill.subtitle;
+document.getElementById('modal-description').textContent = skill.description;
+// Set the background image for the modal header
+modalHeader.style.backgroundImage = backgroundImage;
+modalHeader.style.backgroundSize = 'cover';
+modalHeader.style.backgroundPosition = 'center';
+// Clear and populate tools list
+const toolsList = document.getElementById('modal-tools');
+toolsList.innerHTML = '';
+skill.tools.forEach(tool => {
+const li = document.createElement('li');
+li.textContent = tool;
+toolsList.appendChild(li);
+});
+modal.classList.add('open');
+}
+// --- SKILL CARD RENDERING ---
+const skillContainer = document.getElementById('skill-grid');
+skills.forEach((skill) => {
+const div = document.createElement('div');
+div.className = 'skill-card group'; // Using a different placeholder for image to demonstrate clickability
+const placeholderUrl = `skill/${skill.img}`;
+div.style.backgroundImage = `url('${placeholderUrl}')`;
+// Store the background image style for the modal
+const backgroundImageStyle = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('${placeholderUrl}')`;
+div.innerHTML =
+`<div class="skill-overlay">
+<h3 class="text-xl font-bold group-hover:text-accent-pink transition">${skill.title}</h3>
+<p class="text-sm text-white/70">${skill.subtitle}</p>
+</div>`;
+// Add click listener
+div.addEventListener('click', () => openModal(skill, backgroundImageStyle));
+skillContainer.appendChild(div);
+});
+
+//<!-- ===== JS: Education Modal Logic ===== -->
+
+  const eduModal = document.getElementById('edu-modal');
+  const eduModalBox = document.getElementById('edu-modal-box');
+  const eduModalBg = document.getElementById('edu-modal-bg');
+  const eduModalTitle = document.getElementById('edu-modal-title');
+  const eduModalDate = document.getElementById('edu-modal-date');
+  const eduModalDesc = document.getElementById('edu-modal-desc');
+
+  function openEduModal(title, date, description, bgImg) {
+    eduModalTitle.textContent = title;
+    eduModalDate.textContent = date;
+    eduModalDesc.textContent = description;
+    eduModalBg.style.backgroundImage = `url('${bgImg}')`;
+    eduModal.classList.remove('opacity-0', 'pointer-events-none');
+    eduModal.classList.add('opacity-100', 'pointer-events-auto');
+    eduModalBox.classList.remove('scale-95');
+    eduModalBox.classList.add('scale-100');
+  }
+
+  function closeEduModal() {
+    eduModal.classList.add('opacity-0', 'pointer-events-none');
+    eduModal.classList.remove('opacity-100', 'pointer-events-auto');
+    eduModalBox.classList.add('scale-95');
+    eduModalBox.classList.remove('scale-100');
+  }
+
+//<!-- ===== JS: Project Modal Logic ===== -->
+const projectModal = document.getElementById('project-modal');
+const projectModalBox = document.getElementById('project-modal-box');
+const projectModalTitle = document.getElementById('project-modal-title');
+const projectModalTech = document.getElementById('project-modal-tech');
+const projectModalDesc = document.getElementById('project-modal-desc');
+const projectModalGallery = document.getElementById('project-modal-gallery');
+const projectModalGithub = document.getElementById('project-modal-github');
+
+// === Open Modal ===
+function openProjectModal(title, desc, tech, images, githubLink) {
+  projectModalTitle.textContent = title;
+  projectModalDesc.textContent = desc;
+  projectModalTech.textContent = tech;
+  projectModalGithub.href = githubLink;
+
+  // Reset and add new gallery images
+  projectModalGallery.innerHTML = '';
+  images.forEach(img => {
+    const imgElem = document.createElement('img');
+    imgElem.src = img;
+    imgElem.className =
+      'h-56 rounded-xl border border-[#F1B77B]/30 hover:scale-105 transition-transform cursor-pointer';
+    imgElem.onclick = () => window.open(img, '_blank');
+    projectModalGallery.appendChild(imgElem);
+  });
+
+  // Animate and show modal
+  projectModal.classList.remove('opacity-0', 'pointer-events-none');
+  projectModal.classList.add('opacity-100', 'pointer-events-auto');
+  projectModalBox.classList.remove('scale-95');
+  projectModalBox.classList.add('scale-100');
+}
+
+// === Close Modal ===
+function closeProjectModal() {
+  projectModal.classList.add('opacity-0', 'pointer-events-none');
+  projectModal.classList.remove('opacity-100', 'pointer-events-auto');
+  projectModalBox.classList.add('scale-95');
+  projectModalBox.classList.remove('scale-100');
+}
+
+// === Close when clicking outside modal box ===
+projectModal.addEventListener('click', (e) => {
+  if (e.target === projectModal) {
+    closeProjectModal();
+  }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</body>
+</html>
